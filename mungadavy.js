@@ -1,34 +1,40 @@
 var graphql = require("graphql")
+
 var queryDefinition = new graphql.GraphQLObjectType({
-  name: 'DAVYMUNGA',
-  fields: {
-    name: {
-      type: graphql.GraphQLString,
-      resolve() {
-        return 'Branson';
-      }
-    },
+    name: 'DAVYMUNGA',
+    fields: {
+        name: {
+            type: graphql.GraphQLString,
+            resolve() {
+                return 'Branson';
+            }
+        },
 
-    hobbies: {
-      name: {
-        type: graphql.GraphqlString,
-        resolve() {
-          return 'swimming';
+        hobbies: {
+            type: new graphql.GraphQLObjectType({
+                name: "hobby",
+                fields: () => {
+                    return {
+                        name: {
+                            type: graphql.GraphQLString
+                        }
+                    }
+                }
+            }),
+
         }
-      },
     }
-  }
-
 })
 
 
 
 var schema = new graphql.GraphQLSchema({
-  query: queryDefinition
+    query: queryDefinition
 })
 
-var query = 'query { name, hobbies}` //incoming from the client
+var query = `query { name, hobbies {name}}`
+    //incoming from the client
 
 graphql.graphql(schema, query).then(function(result) {
-  console.log(result)
+    console.log(result)
 });
