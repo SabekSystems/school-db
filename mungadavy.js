@@ -62,7 +62,16 @@ var schema = new graphql.GraphQLSchema({
     query: queryDefinition
 })
 
-var query = `query { name, hobbies {name} qualifications {name}}`
+var query = `query { 
+    name 
+    age, 
+    hobbies {
+      name
+    } 
+    qualifications {
+      name
+    }
+  }`
     //incoming from the client
 
 graphql.graphql(schema, query).then(function(result) {
