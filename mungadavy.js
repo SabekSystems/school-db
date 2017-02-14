@@ -62,5 +62,5 @@ var query = `query { name, hobbies {name} qualifications {name}}`
     //incoming from the client
 
 graphql.graphql(schema, query).then(function(result) {
-    console.log(result)
+    console.log(JSON.stringify(result, null, '\t'))
 });
