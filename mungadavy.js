@@ -16,7 +16,7 @@ var queryDefinition = new graphql.GraphQLObjectType({
             }
         },
         hobbies: {
-            type: new graphql.GraphQLObjectType({
+            type: new graphql.GraphQLList(new graphql.GraphQLObjectType({
                 name: "hobby",
                 fields: () => {
                     return {
@@ -25,15 +25,17 @@ var queryDefinition = new graphql.GraphQLObjectType({
                         }
                     }
                 }
-            }),
+            })),
             resolve: () => {
-                return {
+                return [{
                     name: "swimming"
-                }
+                }, {
+                    name: "eating"
+                }]
             }
         },
         qualifications: {
-            type: new graphql.GraphQLObjectType({
+            type: new graphql.GraphQLList(new graphql.GraphQLObjectType({
                 name: "qualification",
                 fields: () => {
                     return {
@@ -42,11 +44,13 @@ var queryDefinition = new graphql.GraphQLObjectType({
                         }
                     }
                 }
-            }),
+            })),
             resolve: () => {
-                return {
+                return [{
                     name: "digree certificate"
-                }
+                }, {
+                    name: "KCSE certificate"
+                }]
             }
         }
     }
