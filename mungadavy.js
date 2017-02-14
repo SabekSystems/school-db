@@ -9,7 +9,6 @@ var queryDefinition = new graphql.GraphQLObjectType({
                 return 'Branson';
             }
         },
-
         hobbies: {
             type: new graphql.GraphQLObjectType({
                 name: "hobby",
@@ -21,7 +20,11 @@ var queryDefinition = new graphql.GraphQLObjectType({
                     }
                 }
             }),
-
+            resolve: () => {
+                return {
+                    name: "swimming"
+                }
+            }
         }
     }
 })
